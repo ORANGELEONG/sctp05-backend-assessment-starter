@@ -1,0 +1,40 @@
+{{#extends "base"}}
+
+{{#block "content"}}
+<h1>Customers</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Rating</th>
+            <th>Company Name</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each customers}}
+        {{!-- <tr>
+            <td>{{first_name}}</td>
+            <td>{{last_name}}</td>
+            <td>{{rating}}</td>
+            <td>{{name}}</td>
+            <td><a href="" class="btn btn-danger btn-sm">Delete</a></td>
+        </tr> --}}
+
+        <tr>
+            <td>{{this.Customers.first_name}}</td>
+            <td>{{this.Customers.last_name}}</td>
+            <td>{{this.Customers.rating}}</td>
+            <td>{{this.Companies.name}}</td>
+        </tr>
+
+
+        {{/each}}
+    </tbody>
+</table>
+
+{{/block}}
+
+{{/extends}}
