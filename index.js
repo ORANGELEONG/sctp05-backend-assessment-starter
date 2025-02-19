@@ -7,7 +7,7 @@ const { createConnection } = require('mysql2/promise');
 let app = express();
 app.set('view engine', 'hbs');
 app.use(express.static('public'));
-app.use(express.urlencoded({extended:false}));
+app.use(express.urlencoded({ extended: false }));
 
 wax.on(hbs.handlebars);
 wax.setLayoutPath('./views/layouts');
@@ -22,68 +22,42 @@ async function main() {
         'password': process.env.DB_PASSWORD
     })
 
-    app.get('/', (req,res) => {
-        res.send('Hello, World!');
+    app.get("/", function (req, res) {
+        res.render('home')
     });
 
-    app.get('/customers', async (req, res) => {
-       // let [customers] = await connection.execute('SELECT * FROM Customers INNER JOIN Companies ON Customers.company_id = Companies.company_id');
-        
-        const [customers] = await connection.execute({
-            'sql':`
-            SELECT * FROM Customers
-                JOIN Companies ON Customers.company_id = Companies.company_id;
-            `,
-            nestTables: true
 
+
+    app.get('/employees', async function (req, res) {
+        const results = await connection.execute(`SELECT * FROM Employees
+        JOIN Departments
+        ON Employees.department_id = Departments.department_id;`);
+
+        const employees = results[0];
+        console.log(employees);
+        res.render('employees/index', {
+            "employees": employees,
         });
-        console.log(customers);
-        
-        res.render('customers/index', {
-            'customers': customers
-        })
-    });
-    
-
-    app.listen(3000, ()=>{
-        console.log('Server is running')
     });
 
-    
+app.get('/employees/create', async function (req, res) {
+    const results = await connection.execute("SELECT * FROM Departments");
+    const departments = results[0]
+
+    res.render('employees/create', {
+        "departments" : departments
+    })
+})
+
+
+
+
 }
+
 
 main();
 
+app.listen(3000, () => {
+    console.log('Server is running')
+})
 
-
-
-// const express = require('express');
-// const hbs = require('hbs');
-// const wax = require('wax-on');
-// require('dotenv').config();
-// const { createConnection } = require('mysql2/promise');
-
-
-// let app = express();
-// app.set('view engine', 'hbs');
-// app.use(express.static('public'));
-// app.use(express.urlencoded({extended:false}));
-
-// wax.on(hbs.handlebars);
-// wax.setLayoutPath('./views/layouts');
-
-
-// // require in handlebars and their helpers
-// const helpers = require('handlebars-helpers');
-// // tell handlebars-helpers where to find handlebars
-// helpers({
-//     'handlebars': hbs.handlebars
-// })
-
-// app.get('/', (req,res) => {
-//     res.send('Hello, World!');
-// });
-
-// app.listen(3000, ()=>{
-//     console.log('Server is running')
-// });
