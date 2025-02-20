@@ -2,15 +2,15 @@
 use crm;
 -- Inserting data into Companies
 INSERT INTO Companies (name, description) VALUES
-('Alpha Investments', 'A leading investment firm specializing in stocks and bonds'),
-('Beta Financial Services', 'Offers a wide range of financial services including wealth management'),
-('Gamma Capital', 'Focused on private equity and venture capital investments');
+('XIX Investments', 'A leading investment firm specializing in stocks and bonds'),
+('Future Financial Services', 'Offers a wide range of financial services including wealth management'),
+('Tick Tok Capital', 'Focused on private equity and venture capital investments');
 
 -- Inserting data into Customers
 INSERT INTO Customers (first_name, last_name, rating, company_id) VALUES
-('John', 'Doe', 5, 1),
-('Jane', 'Smith', 4, 2),
-('Alice', 'Johnson', 3, 3);
+('Johnny', 'Deep', 5, 1),
+('Brad', 'Smith', 4, 2),
+('Alicia', 'Keith', 3, 3);
 
 -- Inserting data into Departments
 INSERT INTO Departments (name) VALUES
@@ -20,9 +20,9 @@ INSERT INTO Departments (name) VALUES
 
 -- Inserting data into Employees
 INSERT INTO Employees (first_name, last_name, department_id) VALUES
-('Robert', 'Brown', 1),
-('Emily', 'Davis', 1),
-('Michael', 'Wilson', 2);
+('Mister', 'Brown', 1),
+('David', 'Davis', 1),
+('Wilson', 'Hart', 2);
 
 -- Inserting data into Products
 INSERT INTO Products (name, description) VALUES
